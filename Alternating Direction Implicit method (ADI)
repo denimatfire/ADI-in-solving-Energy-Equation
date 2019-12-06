@@ -1,0 +1,46 @@
+#include <iostream>
+
+#include <math.h>
+#include <time.h>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+    int n,m,i,j,iter=0;
+    double t0[100][100],t1[100][100],t2[100][100],t3[100][100],t4[100][100], error, dx,dy, beta, A[100],C[100],x,y;
+    double a[100], b[100], c[100] , d[100], p[100], q[100];
+
+    cout<<" enter n(x axis) and m(y axis) values \n";
+    cin>>n>>m;
+
+    double l=1, t=1;
+    dx=l/(n-1);
+    dy=t/(m-1);
+    beta=dx/dy;
+
+    for(i=0; i<n; i++){
+        t0[i][0]=1;
+        t0[i][m-1]=0;
+        t1[i][0]=1;
+        t1[i][m-1]=0;}
+    for (j=0; j<m; j++){
+         t0[0][j]=1;
+        t0[n-1][j]=1;
+        t1[0][j]=1;
+        t1[n-1][j]=1;}
+    for(i=1; i<n-1; i++){
+        for(j=1; j<m-1; j++){
+            t0[i][j]=0;
+            t1[i][j]=0;}}
+    clock_t begin, end;
+    double cpu_time_used;
+    begin = clock();
+
+do{ double s=0;
+    for(j=1; j<m-1; j++){
+        for(i=1; i<n-1; i++){
+            a[0]=1;
+            b[0]=0;
+            c[0]=0;
+            d[0]=t0[0][j];
